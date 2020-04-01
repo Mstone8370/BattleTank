@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "Math/Vector.h"
+#include "Math/Vector2D.h"
 #include "Tank.h"
 #include "TankPlayerController.generated.h"
 
@@ -19,9 +21,11 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 
+private:
 	ATank* GetControlledTank() const;
 	void AimTowardCrosshair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+	bool GetLookDirection(FVector2D ScreenLocation, FVector &OutWorldDirection) const;
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLocation = 0.5;
