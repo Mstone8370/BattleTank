@@ -13,8 +13,19 @@ void ATankAIController::BeginPlay() {
 
     ATank* PlayerTank = GetPlayerTank();
     if(PlayerTank != nullptr) {
-        UE_LOG(LogTemp, Warning, TEXT("PlayerTankkkkk: %s"), *PlayerTank->GetName());
+        UE_LOG(LogTemp, Warning, TEXT("PlayerTank: %s"), *PlayerTank->GetName());
     }
+}
+
+void ATankAIController::Tick(float DeltaTime) {
+    Super::Tick(DeltaTime);
+
+    ATank* ControlledTank = GetControlledTank();
+    ATank* PlayerTank = GetPlayerTank();
+    if(ControlledTank == nullptr || PlayerTank == nullptr) { return; }
+    
+    FVector HitLocation;
+    ControlledTank->AimAt(PlayerTank->GetActorLocation());
 }
 
 ATank* ATankAIController::GetControlledTank() const {
