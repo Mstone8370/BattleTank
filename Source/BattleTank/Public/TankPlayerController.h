@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DrawDebugHelpers.h"
+#include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "Math/Vector2D.h"
@@ -26,10 +28,14 @@ private:
 	void AimTowardCrosshair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
 	bool GetLookDirection(FVector2D ScreenLocation, FVector &OutWorldDirection) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector &HitLocation) const;
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairXLocation = 0.5;
 
 	UPROPERTY(EditAnywhere)
 	float CrossHairYLocation = 0.5;
+
+	UPROPERTY(EditAnywhere)
+	float LineTraceRange = 1000000.f;
 };
