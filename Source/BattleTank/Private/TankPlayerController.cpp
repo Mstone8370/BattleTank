@@ -41,7 +41,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
     FVector LookDirection;
     if(GetLookDirection(ScreenLocation, LookDirection)) {
         if(GetLookVectorHitLocation(LookDirection, OutHitLocation)) {
-            DrawDebugPoint(GetWorld(), OutHitLocation, 100.f, FColor(255, 0, 0));
+            // DrawDebugPoint(GetWorld(), OutHitLocation, 100.f, FColor(255, 0, 0));
             return true;
         }
     }

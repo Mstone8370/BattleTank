@@ -35,7 +35,39 @@ void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent *BarrelToSet)
 }
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
-	FString OurTankName = GetOwner()->GetName();
-	FString BarrelLocation = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s, Speed: %f"), *OurTankName, *HitLocation.ToString(), *BarrelLocation, LaunchSpeed);
+	// FString OurTankName = GetOwner()->GetName();
+	// FString BarrelLocation = Barrel->GetComponentLocation().ToString();
+	// UE_LOG(LogTemp, Warning, TEXT("%s is aiming at %s from %s, Speed: %f"), *OurTankName, *HitLocation.ToString(), *BarrelLocation, LaunchSpeed);
+
+	if(Barrel == nullptr) { return; }
+
+	FVector OutLaunchVelocity;
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	if(UGameplayStatics::SuggestProjectileVelocity(
+		GetWorld(),
+		OutLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed,
+		false,
+		0.f,
+		0.f,
+		ESuggestProjVelocityTraceOption::DoNotTrace,
+		FCollisionResponseParams::DefaultResponseParam,
+		TArray<AActor*>(),
+		false
+	)) {
+		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
+		// UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
+		// DrawDebugLine(
+		// 	GetWorld(),
+		// 	StartLocation,
+		// 	OutLaunchVelocity,
+		// 	FColor(0, 255, 0),
+		// 	false,
+		// 	-1.f,
+		// 	'\000',
+		// 	5.f
+		// );
+	}
 }

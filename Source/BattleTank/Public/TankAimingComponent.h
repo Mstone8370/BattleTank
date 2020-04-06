@@ -5,6 +5,8 @@
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "DrawDebugHelpers.h"
+#include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
 
