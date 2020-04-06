@@ -43,7 +43,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-	if(UGameplayStatics::SuggestProjectileVelocity(
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity(
 		GetWorld(),
 		OutLaunchVelocity,
 		StartLocation,
@@ -56,18 +56,16 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		FCollisionResponseParams::DefaultResponseParam,
 		TArray<AActor*>(),
 		false
-	)) {
+	);
+
+	if(bHaveAimSolution) {
 		FVector AimDirection = OutLaunchVelocity.GetSafeNormal();
-		// UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
-		// DrawDebugLine(
-		// 	GetWorld(),
-		// 	StartLocation,
-		// 	OutLaunchVelocity,
-		// 	FColor(0, 255, 0),
-		// 	false,
-		// 	-1.f,
-		// 	'\000',
-		// 	5.f
-		// );
+		MoveBarrel(AimDirection);
 	}
+}
+
+void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
+	FRotator BarrelRotation = Barrel->GetForwardVector().Rotation();
+	FRotator AimAsRotation = AimDirection.Rotation();
+	FRotator DeltaRotation = AimAsRotation - BarrelRotation;
 }
