@@ -8,12 +8,13 @@
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "Math/Vector2D.h"
-#include "Tank.h"
 #include "TankPlayerController.generated.h"
 
 /**
  * 
  */
+class ATank;
+
 UCLASS()
 class BATTLETANK_API ATankPlayerController : public APlayerController
 {
