@@ -1,5 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "../Public/TankBarrel.h"
+#include "../Public/TankTurret.h"
 #include "../Public/TankAimingComponent.h"
 #include "../Public/Tank.h"
 
@@ -32,4 +34,8 @@ void ATank::AimAt(FVector HitLocation) {
 
 void ATank::SetBarrelReference(UTankBarrel *BarrelToSet) {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
+void ATank::SetTurretReference(UTankTurret *TurretToSet) {
+	TankAimingComponent->SetTurretReference(TurretToSet);
 }
