@@ -49,4 +49,8 @@ public:
 
 	// For spawning projectile
 	UTankBarrel *Barrel = nullptr;
+
+	float ReloadTimeInSeconds = 3.f;
+
+	double LastFireTime = 0;
 };
