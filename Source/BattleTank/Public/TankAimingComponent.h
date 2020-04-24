@@ -9,6 +9,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
+UENUM()
+enum class EFiringStatus : uint8 {
+	Locked,
+	Aiming,
+	Reloading
+};
+
 class UTankBarrel;
 class UTankTurret;
 
@@ -24,6 +31,9 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
+
+	UPROPERTY(BlueprintReadOnly, Category="State")
+	EFiringStatus FiringStatus = EFiringStatus::Locked;
 
 public:	
 	// Called every frame
