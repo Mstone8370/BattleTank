@@ -19,6 +19,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	SetBarrelReference();
 }
 
 // Called to bind functionality to input
@@ -46,9 +47,10 @@ void ATank::AimAt(FVector HitLocation) {
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
-void ATank::SetBarrelReference(UTankBarrel *BarrelToSet) {
-	if(!BarrelToSet) { return; }
-	Barrel = BarrelToSet;
+void ATank::SetBarrelReference() {
+	UTankAimingComponent *TankAimingComponent = GetTankAimingComponent();
+	if(!TankAimingComponent) { return; }
+	Barrel = TankAimingComponent->GetBarrel();
 }
 
 UTankAimingComponent *ATank::GetTankAimingComponent() const {

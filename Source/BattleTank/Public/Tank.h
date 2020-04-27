@@ -21,8 +21,7 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 	
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel *BarrelToSet);
+	void SetBarrelReference();
 
 	UFUNCTION(BlueprintCallable)
 	UTankAimingComponent *GetTankAimingComponent() const;

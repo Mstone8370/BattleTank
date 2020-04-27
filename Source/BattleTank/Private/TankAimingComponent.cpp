@@ -38,16 +38,6 @@ void UTankAimingComponent::Initialize(UTankBarrel *BarrelToSet, UTankTurret *Tur
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::SetBarrelReference(UTankBarrel *BarrelToSet) {
-	if(BarrelToSet == nullptr) { return; }
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret *TurretToSet) {
-	if(TurretToSet == nullptr) { return; }
-	Turret = TurretToSet;
-}
-
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 	if(!(Barrel && Turret)) { return; }
 
@@ -76,6 +66,10 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed) {
 		// float Time = GetWorld()->GetTimeSeconds();
 		// UE_LOG(LogTemp, Warning, TEXT("%f: No aim solve found"), Time);
 	}
+}
+
+UTankBarrel *UTankAimingComponent::GetBarrel() const {
+	return Barrel;
 }
 
 void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
