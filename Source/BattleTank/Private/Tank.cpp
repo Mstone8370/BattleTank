@@ -29,8 +29,9 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 }
 
 void ATank::Fire() {
+	if(!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if(!(Barrel && isReloaded)) { return; }
+	if(!isReloaded) { return; }
 
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,
@@ -43,19 +44,19 @@ void ATank::Fire() {
 
 void ATank::AimAt(FVector HitLocation) {
 	UTankAimingComponent *TankAimingComponent = GetTankAimingComponent();
-	if(!TankAimingComponent) { return; }
+	if(!ensure(TankAimingComponent)) { return; }
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 void ATank::SetBarrelReference() {
 	UTankAimingComponent *TankAimingComponent = GetTankAimingComponent();
-	if(!TankAimingComponent) { return; }
+	if(!ensure(TankAimingComponent)) { return; }
 	Barrel = TankAimingComponent->GetBarrel();
 }
 
 UTankAimingComponent *ATank::GetTankAimingComponent() const {
 	UTankAimingComponent *TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-	if(!TankAimingComponent) {
+	if(!ensure(TankAimingComponent)) {
 		UE_LOG(LogTemp, Error, TEXT("TankAimingComponent is missing in %s"), *GetName());
 		return nullptr;
 	}
