@@ -9,16 +9,16 @@
 #include "Kismet/GameplayStatics.h"
 #include "TankAimingComponent.generated.h"
 
+class AProjectile;
+class UTankBarrel;
+class UTankTurret;
+
 UENUM()
 enum class EFiringStatus : uint8 {
 	Locked,
 	Aiming,
 	Reloading
 };
-
-class AProjectile;
-class UTankBarrel;
-class UTankTurret;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -43,15 +43,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Setup")
 	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet);
 
-	UPROPERTY(EditDefaultsOnly, Category="Setup")
-	TSubclassOf<AProjectile> ProjectileBlueprint;
-
 	UFUNCTION(BlueprintCallable, Category="Firing")
 	void Fire();
 
 	void AimAt(FVector HitLocation);
 
+	UPROPERTY(EditDefaultsOnly, Category="Setup")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
 private:
+	void MoveBarrel(FVector AimDirection);
+	void MoveTurret(FVector AimDirection);
+	FRotator GetDeltaRotation(FVector AimDirection, FRotator Rotation);
+
 	UPROPERTY(EditDefaultsOnly, Category="Firing")
 	float LaunchSpeed = 4000.f;
 
@@ -62,8 +66,4 @@ private:
 
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
-
-	void MoveBarrel(FVector AimDirection);
-	void MoveTurret(FVector AimDirection);
-	FRotator GetDeltaRotation(FVector AimDirection, FRotator Rotation);
 };
