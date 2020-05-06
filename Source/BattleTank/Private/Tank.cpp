@@ -1,9 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../Public/Projectile.h"
-#include "../Public/TankBarrel.h"
-#include "../Public/TankTurret.h"
-#include "../Public/TankAimingComponent.h"
 #include "../Public/Tank.h"
 
 // Sets default values
@@ -17,48 +13,10 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	SetBarrelReference();
 }
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-
-void ATank::Fire() {
-	if(!ensure(Barrel)) { return; }
-	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if(!isReloaded) { return; }
-
-	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(
-		ProjectileBlueprint,
-		Barrel->GetSocketLocation(FName("Projectile")),
-		Barrel->GetSocketRotation(FName("Projectile"))
-	);
-	Projectile->LaunchProjectile(LaunchSpeed);
-	LastFireTime = FPlatformTime::Seconds();
-}
-
-void ATank::AimAt(FVector HitLocation) {
-	UTankAimingComponent *TankAimingComponent = GetTankAimingComponent();
-	if(!ensure(TankAimingComponent)) { return; }
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
-
-void ATank::SetBarrelReference() {
-	UTankAimingComponent *TankAimingComponent = GetTankAimingComponent();
-	if(!ensure(TankAimingComponent)) { return; }
-	Barrel = TankAimingComponent->GetBarrel();
-}
-
-UTankAimingComponent *ATank::GetTankAimingComponent() const {
-	UTankAimingComponent *TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-	if(!ensure(TankAimingComponent)) {
-		UE_LOG(LogTemp, Error, TEXT("TankAimingComponent is missing in %s"), *GetName());
-		return nullptr;
-	}
-
-	return TankAimingComponent;
 }
