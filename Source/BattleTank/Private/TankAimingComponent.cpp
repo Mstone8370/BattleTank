@@ -83,11 +83,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation) {
 	}
 }
 
-UTankBarrel *UTankAimingComponent::GetBarrel() const {
-	return Barrel;
-}
-
 void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
+	if(!ensure(Barrel)) { return; }
 	FRotator DeltaRotation = GetDeltaRotation(
 		AimDirection,
 		Barrel->GetForwardVector().Rotation()
@@ -97,6 +94,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 }
 
 void UTankAimingComponent::MoveTurret(FVector AimDirection) {
+	if(!ensure(Turret)) { return; }
 	FRotator DeltaRotation = GetDeltaRotation(
 		AimDirection,
 		Turret->GetForwardVector().Rotation()

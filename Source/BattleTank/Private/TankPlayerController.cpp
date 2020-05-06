@@ -7,7 +7,6 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-    // get controlled tank's aiming component
     AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
     if(ensure(AimingComponent)) {
         FoundAimingComponent(AimingComponent);

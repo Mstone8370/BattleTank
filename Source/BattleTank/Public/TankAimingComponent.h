@@ -16,9 +16,9 @@ enum class EFiringStatus : uint8 {
 	Reloading
 };
 
+class AProjectile;
 class UTankBarrel;
 class UTankTurret;
-class AProjectile;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BATTLETANK_API UTankAimingComponent : public UActorComponent
@@ -50,7 +50,6 @@ public:
 	void Fire();
 
 	void AimAt(FVector HitLocation);
-	UTankBarrel *GetBarrel() const;
 
 private:
 	UPROPERTY(EditDefaultsOnly, Category="Firing")
