@@ -1,21 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../Public/Tank.h"
 #include "../Public/TankAimingComponent.h"
 #include "../Public/TankPlayerController.h"
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-    
-    auto ControlledTank = GetControlledTank();
 
-    if(ControlledTank != nullptr) {
-        UE_LOG(LogTemp, Warning, TEXT("ControlledTank: %s"), *ControlledTank->GetName());
-    }
-
-    auto AimingComponent = ControlledTank->GetTankAimingComponent();
-    if(AimingComponent) {
+    // get controlled tank's aiming component
+    AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+    if(ensure(AimingComponent)) {
         FoundAimingComponent(AimingComponent);
     } else {
         UE_LOG(LogTemp, Error, TEXT("Player controller can't find aiming component at BeginPlay"));
@@ -28,16 +22,12 @@ void ATankPlayerController::Tick(float DeltaTime) {
     AimTowardCrosshair();
 }
 
-ATank* ATankPlayerController::GetControlledTank() const {
-    return Cast<ATank>(GetPawn());
-}
-
 void ATankPlayerController::AimTowardCrosshair() {
-    if(!ensure(GetControlledTank())) { return; }
+    if(!ensure(AimingComponent)) { return; }
 
     FVector HitLocation;
     if(GetSightRayHitLocation(HitLocation)) {
-        GetControlledTank()->AimAt(HitLocation);
+        AimingComponent->AimAt(HitLocation);
     }
 }
 
@@ -49,7 +39,6 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &OutHitLocation) cons
     FVector LookDirection;
     if(GetLookDirection(ScreenLocation, LookDirection)) {
         if(GetLookVectorHitLocation(LookDirection, OutHitLocation)) {
-            // DrawDebugPoint(GetWorld(), OutHitLocation, 100.f, FColor(255, 0, 0));
             return true;
         }
     }
