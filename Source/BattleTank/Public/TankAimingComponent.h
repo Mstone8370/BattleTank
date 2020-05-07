@@ -34,7 +34,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(BlueprintReadOnly, Category="State")
-	EFiringStatus FiringStatus = EFiringStatus::Aiming;
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 public:	
 	// Called every frame
@@ -63,6 +63,7 @@ private:
 	float ReloadTimeInSeconds = 3.f;
 
 	double LastFireTime = 0;
+	bool isReloaded = false;
 
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
