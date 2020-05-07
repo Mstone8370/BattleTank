@@ -52,9 +52,10 @@ public:
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
 private:
-	void MoveBarrel(FVector AimDirection);
-	void MoveTurret(FVector AimDirection);
-	FRotator GetDeltaRotation(FVector AimDirection, FRotator Rotation);
+	void MoveBarrel(FVector Direction);
+	void MoveTurret(FVector Direction);
+	bool IsBarrelMoving();
+	FRotator GetDeltaRotation(FVector Direction, FRotator Rotation);
 
 	UPROPERTY(EditDefaultsOnly, Category="Firing")
 	float LaunchSpeed = 4000.f;
@@ -63,8 +64,8 @@ private:
 	float ReloadTimeInSeconds = 3.f;
 
 	double LastFireTime = 0;
-	bool isReloaded = false;
 
 	UTankBarrel *Barrel = nullptr;
 	UTankTurret *Turret = nullptr;
+	FVector AimDirection;
 };
