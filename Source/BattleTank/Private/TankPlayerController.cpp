@@ -22,7 +22,7 @@ void ATankPlayerController::Tick(float DeltaTime) {
 }
 
 void ATankPlayerController::AimTowardCrosshair() {
-    if(!ensure(AimingComponent)) { return; }
+    if(!ensure(AimingComponent && GetPawn())) { return; }
 
     FVector HitLocation;
     if(GetSightRayHitLocation(HitLocation)) {
