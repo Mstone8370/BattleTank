@@ -123,3 +123,7 @@ void UTankAimingComponent::MoveTurret(FVector Direction) {
 FRotator UTankAimingComponent::GetDeltaRotation(FVector Direction, FRotator Rotation) {
 	return Direction.Rotation() - Rotation;
 }
+
+EFiringStatus UTankAimingComponent::GetFiringStatus() const {
+	return FiringStatus;
+}

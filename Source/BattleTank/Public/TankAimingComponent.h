@@ -47,6 +47,7 @@ public:
 	void Fire();
 
 	void AimAt(FVector HitLocation);
+	EFiringStatus GetFiringStatus() const;
 
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;

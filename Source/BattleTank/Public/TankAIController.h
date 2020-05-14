@@ -23,7 +23,8 @@ public:
 	void BeginPlay() override;
 	void Tick(float DeltaTime) override;
 
-private:
-	float AcceptanceRadius = 3000.f;
+protected:
+	UPROPERTY(EditAnywhere, Category="Setup")
+	float AcceptanceRadius = 6000.f;
 	
 };
