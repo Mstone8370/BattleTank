@@ -113,6 +113,9 @@ void UTankAimingComponent::MoveTurret(FVector Direction) {
 		Direction,
 		Turret->GetForwardVector().Rotation()
 	);
+	if(FMath::Abs(DeltaRotation.Yaw) >= 180.f) {
+		DeltaRotation.Yaw = 180.f - DeltaRotation.Yaw;
+	}
 
 	Turret->Rotate(DeltaRotation.Yaw);
 }
