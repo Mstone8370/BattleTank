@@ -18,7 +18,7 @@ AProjectile::AProjectile()
 	LaunchBlast->AttachTo(RootComponent);
 
 	ImpactBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Impact Blast"));
-	// ImpactBlast->AttachTo(RootComponent);
+	ImpactBlast->AttachTo(RootComponent);
 	ImpactBlast->bAutoActivate = false;
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement"));
@@ -49,5 +49,4 @@ void AProjectile::LaunchProjectile(float Speed) {
 void AProjectile::OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, UPrimitiveComponent *OtherComponent, FVector NormalImpulse, const FHitResult &Hit) {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
-	UE_LOG(LogTemp, Warning, TEXT("Hit"));
 }

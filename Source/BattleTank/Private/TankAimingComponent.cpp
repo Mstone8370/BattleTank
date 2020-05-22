@@ -41,11 +41,13 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	}
 }
 
-void UTankAimingComponent::Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet) {
+void UTankAimingComponent::Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet, TSubclassOf<AProjectile> ProjectileToSet) {
 	if(!ensure(BarrelToSet && TurretToSet)) { return; }
 
 	Barrel = BarrelToSet;
 	Turret = TurretToSet;
+
+	ProjectileBlueprint = ProjectileToSet;
 }
 
 int32 UTankAimingComponent::GetRoundsLeft() const {
@@ -54,7 +56,7 @@ int32 UTankAimingComponent::GetRoundsLeft() const {
 
 void UTankAimingComponent::Fire() {
 	if(FiringStatus == EFiringStatus::Reloading || FiringStatus == EFiringStatus::OutOfAmmo) { return; }
-	if(!ensure(Barrel && ProjectileBlueprint)) { return; }
+	if(!ensure(Barrel)) { return; }
 
 	AProjectile *Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBlueprint,

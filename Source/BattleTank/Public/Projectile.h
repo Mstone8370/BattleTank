@@ -28,6 +28,7 @@ public:
 	void LaunchProjectile(float Speed);
 
 private:
+	UFUNCTION(BlueprintCallable)
 	void OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, UPrimitiveComponent *OtherComponent, FVector NormalImpulse, const FHitResult &Hit);
 
 	UProjectileMovementComponent *ProjectileMovement = nullptr;

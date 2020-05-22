@@ -42,7 +42,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	
 	UFUNCTION(BlueprintCallable, Category="Setup")
-	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet);
+	void Initialize(UTankBarrel *BarrelToSet, UTankTurret *TurretToSet, TSubclassOf<AProjectile> ProjectileToSet);
 
 	UFUNCTION(BlueprintCallable, Category="Firing")
 	int32 GetRoundsLeft() const;
