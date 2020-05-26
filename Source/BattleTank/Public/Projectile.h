@@ -3,10 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/StaticMeshComponent.h"
+#include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "TimerManager.h"
 #include "Projectile.generated.h"
 
 UCLASS()
@@ -32,6 +35,8 @@ private:
 	UFUNCTION(BlueprintCallable)
 	void OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, UPrimitiveComponent *OtherComponent, FVector NormalImpulse, const FHitResult &Hit);
 
+	void OnTimerExpire();
+
 	UProjectileMovementComponent *ProjectileMovement = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
@@ -46,4 +51,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category="Components")
 	URadialForceComponent *ExplosionForce = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category="Setup")
+	float DestroyDelay = 10.f;
 };
