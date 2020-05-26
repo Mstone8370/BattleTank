@@ -6,7 +6,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "Engine/EngineTypes.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/DamageType.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
 #include "TimerManager.h"
@@ -53,4 +55,7 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
 	float DestroyDelay = 10.f;
+
+	UPROPERTY(EditDefaultsOnly, Category="Setup")
+	float ProjectileDamage = 17.f;
 };
