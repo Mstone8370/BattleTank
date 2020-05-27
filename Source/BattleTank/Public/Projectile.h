@@ -57,5 +57,5 @@ private:
 	float DestroyDelay = 10.f;
 
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
-	float ProjectileDamage = 17.f;
+	float ProjectileDamage = 32.f;
 };

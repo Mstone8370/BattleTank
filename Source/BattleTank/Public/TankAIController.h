@@ -12,6 +12,7 @@
  * 
  */
 
+class ATank;
 class UTankAimingComponent;
 
 UCLASS()
@@ -26,5 +27,7 @@ public:
 protected:
 	UPROPERTY(EditAnywhere, Category="Setup")
 	float AcceptanceRadius = 6000.f;
+
+	virtual void SetPawn(APawn *InPawn) override;
 	
 };
