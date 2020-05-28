@@ -28,6 +28,10 @@ protected:
 	UPROPERTY(EditAnywhere, Category="Setup")
 	float AcceptanceRadius = 6000.f;
 
+private:
 	virtual void SetPawn(APawn *InPawn) override;
 	
+	UFUNCTION()
+	void OnPossessedTankDeath();
+
 };

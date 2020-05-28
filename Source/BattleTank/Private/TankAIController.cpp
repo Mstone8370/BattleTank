@@ -35,5 +35,10 @@ void ATankAIController::SetPawn(APawn *InPawn) {
         if(!ensure(PossessedTank)) { return; }
 
         // TODO Subscribe our local method to the tank's death method
+        PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
     }
+}
+
+void ATankAIController::OnPossessedTankDeath() {
+    UE_LOG(LogTemp, Warning, TEXT("Received"));
 }
