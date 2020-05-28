@@ -63,7 +63,7 @@ private:
 	FRotator GetDeltaRotation(FVector Direction, FRotator Rotation);
 
 	UPROPERTY(EditDefaultsOnly, Category="Firing")
-	float LaunchSpeed = 4000.f;
+	float LaunchSpeed = 5000.f;
 
 	UPROPERTY(EditDefaultsOnly, Category="Firing")
 	float ReloadTimeInSeconds = 3.f;

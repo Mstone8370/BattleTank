@@ -26,7 +26,7 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, Category="Setup")
-	float AcceptanceRadius = 6000.f;
+	float AcceptanceRadius = 10000.f;
 
 private:
 	virtual void SetPawn(APawn *InPawn) override;

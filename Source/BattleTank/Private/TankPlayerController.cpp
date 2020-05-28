@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "../Public/Tank.h"
 #include "../Public/TankAimingComponent.h"
 #include "../Public/TankPlayerController.h"
 
@@ -12,6 +13,12 @@ void ATankPlayerController::BeginPlay()
         FoundAimingComponent(AimingComponent);
     } else {
         UE_LOG(LogTemp, Error, TEXT("Player controller can't find aiming component at BeginPlay"));
+    }
+
+    ATank* PlayerTank = Cast<ATank>(GetPawn());
+    if(ensure(PlayerTank))
+    {
+        PlayerTank->OnDeath.AddDynamic(this, &ATankPlayerController::OnPlayerTankDeath);
     }
 }
 
@@ -70,4 +77,9 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVec
 
     OutHitLocation = FVector(0.f);
     return false;
+}
+
+void ATankPlayerController::OnPlayerTankDeath() {
+    UE_LOG(LogTemp, Warning, TEXT("Player Received"));
+    StartSpectatingOnly();
 }
