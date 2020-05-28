@@ -24,19 +24,22 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController *EventInstigator, AActor *DamageCauser) {
+float ATank::TakeDamage(float DamageAmount, struct FDamageEvent const & DamageEvent, class AController* EventInstigator, AActor* DamageCauser)
+{
 	int32 DamagePoint = FPlatformMath::RoundToInt(DamageAmount);
 	int32 DamageToApply = FMath::Clamp<int32>(DamagePoint, 0.f, CurrentHealth);
 
 	CurrentHealth -= DamageToApply;
 
-	if(CurrentHealth <= 0) {
+	if (CurrentHealth <= 0)
+	{
 		OnDeath.Broadcast();
 	}
 
 	return DamageToApply;
 }
 
-float ATank::GetHealthPercent() const {
+float ATank::GetHealthPercent() const
+{
 	return (float)CurrentHealth / StartingHealth;
 }

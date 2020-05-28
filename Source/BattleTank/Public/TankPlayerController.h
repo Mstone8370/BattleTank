@@ -28,13 +28,13 @@ public:
 
 protected:
 	UFUNCTION(BlueprintImplementableEvent, Category="Setup")
-	void FoundAimingComponent(UTankAimingComponent *AimCompRef);
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 
 private:
 	void AimTowardCrosshair();
 	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
-	bool GetLookDirection(FVector2D ScreenLocation, FVector &OutWorldDirection) const;
-	bool GetLookVectorHitLocation(FVector LookDirection, FVector &OutHitLocation) const;
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& OutWorldDirection) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& OutHitLocation) const;
 
 	UFUNCTION()
 	void OnPlayerTankDeath();
@@ -48,5 +48,5 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float LineTraceRange = 1000000.f;
 
-	UTankAimingComponent *AimingComponent = nullptr;
+	UTankAimingComponent* AimingComponent = nullptr;
 };

@@ -42,12 +42,14 @@ void AProjectile::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AProjectile::LaunchProjectile(float Speed) {
+void AProjectile::LaunchProjectile(float Speed)
+{
 	ProjectileMovement->SetVelocityInLocalSpace(FVector::ForwardVector * Speed);
 	ProjectileMovement->Activate();
 }
 
-void AProjectile::OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, UPrimitiveComponent *OtherComponent, FVector NormalImpulse, const FHitResult &Hit) {
+void AProjectile::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit)
+{
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ExplosionForce->FireImpulse();
@@ -74,6 +76,7 @@ void AProjectile::OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, U
 	);
 }
 
-void AProjectile::OnTimerExpire() {
+void AProjectile::OnTimerExpire()
+{
 	this->Destroy();
 }

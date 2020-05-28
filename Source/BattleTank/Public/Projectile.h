@@ -35,23 +35,23 @@ public:
 
 private:
 	UFUNCTION(BlueprintCallable)
-	void OnHit(UPrimitiveComponent *HitComponent, AActor *OtherActor, UPrimitiveComponent *OtherComponent, FVector NormalImpulse, const FHitResult &Hit);
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
 
 	void OnTimerExpire();
 
-	UProjectileMovementComponent *ProjectileMovement = nullptr;
+	UProjectileMovementComponent*  ProjectileMovement = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	UStaticMeshComponent *CollisionMesh = nullptr;
+	UStaticMeshComponent* CollisionMesh = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	UParticleSystemComponent *LaunchBlast = nullptr;
+	UParticleSystemComponent* LaunchBlast = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	UParticleSystemComponent *ImpactBlast = nullptr;
+	UParticleSystemComponent*  ImpactBlast = nullptr;
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	URadialForceComponent *ExplosionForce = nullptr;
+	URadialForceComponent* ExplosionForce = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
 	float DestroyDelay = 10.f;

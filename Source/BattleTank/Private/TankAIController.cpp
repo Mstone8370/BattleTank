@@ -4,17 +4,22 @@
 #include "../Public/TankAimingComponent.h"
 #include "../Public/TankAIController.h"
 
-void ATankAIController::BeginPlay() {
+void ATankAIController::BeginPlay()
+{
     Super::BeginPlay();
 }
 
-void ATankAIController::Tick(float DeltaTime) {
+void ATankAIController::Tick(float DeltaTime)
+{
     Super::Tick(DeltaTime);
 
-    UTankAimingComponent *ControlledPawnAimingComponent = 
+    UTankAimingComponent* ControlledPawnAimingComponent = 
         GetPawn()->FindComponentByClass<UTankAimingComponent>();
-    APawn *PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-    if(!ensure(ControlledPawnAimingComponent && PlayerPawn)) { return; }
+    APawn* PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+    if (!ensure(ControlledPawnAimingComponent && PlayerPawn))
+    {
+        return;
+    }
     
     // Move towards the player
     MoveToActor(PlayerPawn, AcceptanceRadius);
@@ -22,24 +27,34 @@ void ATankAIController::Tick(float DeltaTime) {
     // Aim towards the player
     ControlledPawnAimingComponent->AimAt(PlayerPawn->GetActorLocation());
 
-    if(ControlledPawnAimingComponent->GetFiringStatus() == EFiringStatus::Locked) {
+    if (ControlledPawnAimingComponent->GetFiringStatus() == EFiringStatus::Locked)
+    {
         ControlledPawnAimingComponent->Fire();
     }
 }
 
-void ATankAIController::SetPawn(APawn *InPawn) {
+void ATankAIController::SetPawn(APawn* InPawn)
+{
     Super::SetPawn(InPawn);
 
-    if(InPawn) {
-        ATank *PossessedTank = Cast<ATank>(InPawn);
-        if(!ensure(PossessedTank)) { return; }
+    if (InPawn)
+    {
+        ATank* PossessedTank = Cast<ATank>(InPawn);
+        if (!ensure(PossessedTank))
+        {
+            return;
+        }
 
-        // TODO Subscribe our local method to the tank's death method
         PossessedTank->OnDeath.AddUniqueDynamic(this, &ATankAIController::OnPossessedTankDeath);
     }
 }
 
-void ATankAIController::OnPossessedTankDeath() {
-    UE_LOG(LogTemp, Warning, TEXT("Received"));
+void ATankAIController::OnPossessedTankDeath()
+{
+    if (!ensure(GetPawn()))
+    {
+        return;
+    }
+
     GetPawn()->DetachFromControllerPendingDestroy();
 }
