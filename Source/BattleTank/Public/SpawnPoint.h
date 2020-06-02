@@ -26,6 +26,9 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable, Category="Setup")
+	void Initialize(TSubclassOf<AActor> SpawnClassToSet);
+
 private:
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
 	TSubclassOf<AActor> SpawnClass;

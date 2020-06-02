@@ -39,3 +39,7 @@ void USpawnPoint::TickComponent(float DeltaTime, ELevelTick TickType, FActorComp
 	// ...
 }
 
+void USpawnPoint::Initialize(TSubclassOf<AActor> SpawnClassToSet)
+{
+	SpawnClass = SpawnClassToSet;
+}
