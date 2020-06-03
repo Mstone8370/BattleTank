@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "../Public/TankTrack.h"
 #include "../Public/TankMovementComponent.h"
+#include "../Public/TankTrack.h"
 
 void UTankMovementComponent::Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
 {

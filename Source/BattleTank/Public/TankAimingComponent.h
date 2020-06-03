@@ -55,6 +55,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category="Setup")
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+	
+	FVector AimDirection;
 
 private:
 	void MoveBarrel(FVector Direction);
@@ -75,5 +77,4 @@ private:
 
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
-	FVector AimDirection;
 };
