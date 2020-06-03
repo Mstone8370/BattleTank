@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/SphereComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "GameFramework/Actor.h"
 #include "PhysicsEngine/PhysicsConstraintComponent.h"
 #include "SprungWheel.generated.h"
@@ -28,9 +30,15 @@ private:
 	void SetupConstraint();
 
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	UPhysicsConstraintComponent* PhysicsConstraint = nullptr;
+	UPhysicsConstraintComponent* AxelConstraint = nullptr;
 	
 	UPROPERTY(VisibleAnywhere, Category="Components")
-	UStaticMeshComponent* Wheel = nullptr;
+	UStaticMeshComponent* Axel = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category="Components")
+	UPhysicsConstraintComponent* AxelWheelConstraint = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category="Components")
+	USphereComponent* Wheel = nullptr;
 
 };
